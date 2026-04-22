@@ -29,27 +29,15 @@ const projectsData = [
   },
   {
     id: 3,
-    title: "Pixela Website and App",
+    title: "View Tube",
     description:
-      "An Instagram-style social media application built with the MERN stack. Currently includes post creation functionality, with upcoming features like authentication, user profiles, likes, comments, and explore feed.",
-    image:
-      "https://cdn-icons-png.freepik.com/256/10295/10295918.png?semt=ais_white_label",
-    tags: [
-      "React Native",
-      "Expo",
-      "MongoDB",
-      "Redux",
-      "React.js",
-      "Express.js",
-      "Node.js",
-      "Postman",
-      "Tailwind",
-    ],
+      "ViewTube is a YouTube-inspired video-sharing platform built using Laravel. It includes core features such as user authentication, video uploading, commenting, liking, and saving videos. The project demonstrates full-stack development skills, focusing on backend logic, database relationships, and user interaction.",
+    image: "/viewtube.png",
+    tags: ["HTML", "CSS", "JavaScript", "Tailwind", "Laravel", "MySQL"],
     gradient: "from-teal-800/40 via-teal-700/30 to-emerald-800/40",
-    inProgress: true,
     links: {
-      demo: "https://oshaq-naimat.free.nf/",
-      github: "https://github.com/OshaqNaimat/GMS.git",
+      demo: "/viewtube project final.mp4",
+      github: "https://github.com/OshaqNaimat/Laravel-youtube.git",
     },
   },
   {

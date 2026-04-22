@@ -95,64 +95,65 @@ function useAntigravity(canvasRef, mode) {
           if (this.y < -10) this.reset(false);
           if (this.x < -10) this.x = W + 10;
           if (this.x > W + 10) this.x = -10;
-        } else if (currentMode === "explode") {
-          const dx = this.x - mouse.x,
-            dy = this.y - mouse.y;
-          const d2 = dx * dx + dy * dy;
-          if (d2 < 16900 && mouse.x > 0) {
-            const d = Math.sqrt(d2),
-              f = (130 - d) / 130;
-            this.vx += (dx / d) * f * 1.4;
-            this.vy += (dy / d) * f * 1.4;
-          }
-          this.vy += 0.07;
-          this.vx *= 0.97;
-          this.vy *= 0.97;
-          this.x += this.vx;
-          this.y += this.vy;
-          if (
-            this.y > H + 20 ||
-            this.y < -20 ||
-            this.x < -20 ||
-            this.x > W + 20
-          )
-            this.reset(false);
-        } else if (currentMode === "orbit") {
-          this.orbitAngle += this.orbitSpeed;
-          const cx = W / 2,
-            cy = H / 2;
-          const tx =
-            cx +
-            Math.cos(this.orbitAngle + t * 0.0004) *
-              (this.orbitR + Math.sin(t * 0.001 + this.angle) * 36);
-          const ty =
-            cy + Math.sin(this.orbitAngle + t * 0.0004) * (this.orbitR * 0.52);
-          if (mouse.x > 0) {
-            const ddx = mouse.x - this.x,
-              ddy = mouse.y - this.y;
-            const md = Math.hypot(ddx, ddy);
-            if (md < 160) {
-              this.x += (ddx / md) * 1.2;
-              this.y += (ddy / md) * 1.2;
-            }
-          }
-          this.x += (tx - this.x) * 0.08;
-          this.y += (ty - this.y) * 0.08;
-        } else if (currentMode === "vortex") {
-          const cx = mouse.x > 0 ? mouse.x : W / 2;
-          const cy = mouse.y > 0 ? mouse.y : H / 2;
-          const dx = this.x - cx,
-            dy = this.y - cy;
-          const d = Math.hypot(dx, dy),
-            angle = Math.atan2(dy, dx);
-          const pull = Math.min(4.0, 700 / (d + 1));
-          this.vx += -Math.sin(angle) * pull * 0.1 - dx * 0.003;
-          this.vy += Math.cos(angle) * pull * 0.1 - dy * 0.003;
-          this.vx *= 0.94;
-          this.vy *= 0.94;
-          this.x += this.vx;
-          this.y += this.vy;
         }
+        // else if (currentMode === "explode") {
+        //   const dx = this.x - mouse.x,
+        //     dy = this.y - mouse.y;
+        //   const d2 = dx * dx + dy * dy;
+        //   if (d2 < 16900 && mouse.x > 0) {
+        //     const d = Math.sqrt(d2),
+        //       f = (130 - d) / 130;
+        //     this.vx += (dx / d) * f * 1.4;
+        //     this.vy += (dy / d) * f * 1.4;
+        //   }
+        //   this.vy += 0.07;
+        //   this.vx *= 0.97;
+        //   this.vy *= 0.97;
+        //   this.x += this.vx;
+        //   this.y += this.vy;
+        //   if (
+        //     this.y > H + 20 ||
+        //     this.y < -20 ||
+        //     this.x < -20 ||
+        //     this.x > W + 20
+        //   )
+        //     this.reset(false);
+        // } else if (currentMode === "orbit") {
+        //   this.orbitAngle += this.orbitSpeed;
+        //   const cx = W / 2,
+        //     cy = H / 2;
+        //   const tx =
+        //     cx +
+        //     Math.cos(this.orbitAngle + t * 0.0004) *
+        //       (this.orbitR + Math.sin(t * 0.001 + this.angle) * 36);
+        //   const ty =
+        //     cy + Math.sin(this.orbitAngle + t * 0.0004) * (this.orbitR * 0.52);
+        //   if (mouse.x > 0) {
+        //     const ddx = mouse.x - this.x,
+        //       ddy = mouse.y - this.y;
+        //     const md = Math.hypot(ddx, ddy);
+        //     if (md < 160) {
+        //       this.x += (ddx / md) * 1.2;
+        //       this.y += (ddy / md) * 1.2;
+        //     }
+        //   }
+        //   this.x += (tx - this.x) * 0.08;
+        //   this.y += (ty - this.y) * 0.08;
+        // } else if (currentMode === "vortex") {
+        //   const cx = mouse.x > 0 ? mouse.x : W / 2;
+        //   const cy = mouse.y > 0 ? mouse.y : H / 2;
+        //   const dx = this.x - cx,
+        //     dy = this.y - cy;
+        //   const d = Math.hypot(dx, dy),
+        //     angle = Math.atan2(dy, dx);
+        //   const pull = Math.min(4.0, 700 / (d + 1));
+        //   this.vx += -Math.sin(angle) * pull * 0.1 - dx * 0.003;
+        //   this.vy += Math.cos(angle) * pull * 0.1 - dy * 0.003;
+        //   this.vx *= 0.94;
+        //   this.vy *= 0.94;
+        //   this.x += this.vx;
+        //   this.y += this.vy;
+        // }
       }
       draw() {
         const tl = this.trail;
@@ -255,28 +256,28 @@ function useAntigravity(canvasRef, mode) {
 /* ─────────────────────────────────────────────
    Mode Switcher Component
 ───────────────────────────────────────────── */
-const MODES = ["float", "explode", "orbit", "vortex"];
+// const MODES = ["float", "explode", "orbit", "vortex"];
 
-function ModeSwitcher({ mode, onChange }) {
-  return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex gap-2 bg-black/50 backdrop-blur-md border border-white/10 rounded-full px-2 py-1.5">
-      {MODES.map((m) => (
-        <button
-          key={m}
-          onClick={() => onChange(m)}
-          className={`text-[10px] tracking-widest uppercase px-4 py-1.5 rounded-full transition-all duration-200 font-mono
-            ${
-              mode === m
-                ? "bg-purple-600/40 text-purple-300 border border-purple-500/50"
-                : "text-white/40 hover:text-white/75"
-            }`}
-        >
-          {m}
-        </button>
-      ))}
-    </div>
-  );
-}
+// function ModeSwitcher({ mode, onChange }) {
+//   return (
+//     <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex gap-2 bg-black/50 backdrop-blur-md border border-white/10 rounded-full px-2 py-1.5">
+//       {MODES.map((m) => (
+//         <button
+//           key={m}
+//           onClick={() => onChange(m)}
+//           className={`text-[10px] tracking-widest uppercase px-4 py-1.5 rounded-full transition-all duration-200 font-mono
+//             ${
+//               mode === m
+//                 ? "bg-purple-600/40 text-purple-300 border border-purple-500/50"
+//                 : "text-white/40 hover:text-white/75"
+//             }`}
+//         >
+//           {m}
+//         </button>
+//       ))}
+//     </div>
+//   );
+// }
 
 /* ─────────────────────────────────────────────
    Main App
@@ -299,12 +300,12 @@ function App() {
     if (!canvas) return;
     canvas._mode = mode;
     // burst on explode switch
-    if (mode === "explode" && canvas._particles) {
-      canvas._particles.forEach((p) => {
-        p.vx = (Math.random() - 0.5) * 14;
-        p.vy = (Math.random() - 0.5) * 14 - 5;
-      });
-    }
+    // if (mode === "explode" && canvas._particles) {
+    //   canvas._particles.forEach((p) => {
+    //     p.vx = (Math.random() - 0.5) * 14;
+    //     p.vy = (Math.random() - 0.5) * 14 - 5;
+    //   });
+    // }
   }, [mode]);
 
   // Scroll Reveal
@@ -538,7 +539,6 @@ function App() {
       </footer>
 
       {/* ── Mode Switcher ── */}
-      <ModeSwitcher mode={mode} onChange={setMode} />
     </div>
   );
 }
