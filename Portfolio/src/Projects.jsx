@@ -36,7 +36,7 @@ const projectsData = [
     tags: ["HTML", "CSS", "JavaScript", "Tailwind", "Laravel", "MySQL"],
     gradient: "from-teal-800/40 via-teal-700/30 to-emerald-800/40",
     links: {
-      demo: "/viewtube project final.mp4",
+      demo: "/viewtube project full final.mp4",
       github: "https://github.com/OshaqNaimat/Laravel-youtube.git",
     },
   },
